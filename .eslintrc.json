@@ -1,3 +1,8 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "indent": ["error", 2], // Double spaces for indentation
+    "quotes": ["error", "single"], // Use single quotes for strings
+    "semi": ["error", "always"] // Optionally, ensure semicolons
+  }
 }
