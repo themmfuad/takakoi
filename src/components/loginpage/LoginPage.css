@@ -21,7 +21,13 @@
 }
 
 #euro-image {
-  width: 40%;
+  position: absolute; /* Use absolute positioning */
+  left: 30%; /* Horizontally center by setting left to 50% */
+  transform: translateX(-10%); /* Move the element left by 50% of its width */
+  width: 50%; /* Adjust the width as needed */
+  background-color: transparent;
+  display: block; /* Ensure it behaves like a block element */
+  animation: EuroAnimation 2.5s linear forwards; /* Animation for 3 seconds */
 }
 
 #wallet-image {
@@ -50,5 +56,18 @@
   }
   100% {
     transform: translateY(-100%) translateX(-10%) rotate(230deg);
+  }
+}
+
+/* Keyframes for the animation */
+@keyframes EuroAnimation {
+  0% {
+    transform: translateY(-80%) translateX(-10%);
+  }
+  25% {
+    transform: translateY(-70%) translateX(-10%);
+  }
+  50% {
+    transform: translateY(-30%) translateX(-10%);
   }
 }
