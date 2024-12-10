@@ -1,0 +1,54 @@
+.login-page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#title {
+  font-weight: 800;
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
+#subtitle {
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+  margin: 0 2rem;
+  text-align: center;
+}
+
+#euro-image {
+  width: 40%;
+}
+
+#wallet-image {
+  position: absolute; /* Use absolute positioning */
+  left: 30%; /* Horizontally center by setting left to 50% */
+  transform: translateX(-10%) rotate(230deg); /* Move the element left by 50% of its width */
+  width: 50%; /* Adjust the width as needed */
+  background-color: transparent;
+  display: block; /* Ensure it behaves like a block element */
+  animation: moveFromTop 5s linear forwards; /* Animation for 3 seconds */
+}
+
+/* Keyframes for the animation */
+@keyframes moveFromTop {
+  0% {
+    transform: translateY(-100%) translateX(-10%) rotate(230deg);
+  }
+  25% {
+    transform: translateY(-70%) translateX(-10%) rotate(230deg);
+  }
+  50% {
+    transform: translateY(-30%) translateX(-10%) rotate(230deg);
+  }
+  75% {
+    transform: translateY(-70%) translateX(-10%) rotate(230deg);
+  }
+  100% {
+    transform: translateY(-100%) translateX(-10%) rotate(230deg);
+  }
+}
