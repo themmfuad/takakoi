@@ -20,54 +20,81 @@
   text-align: center;
 }
 
-#euro-image {
-  position: absolute; /* Use absolute positioning */
-  left: 30%; /* Horizontally center by setting left to 50% */
-  transform: translateX(-10%); /* Move the element left by 50% of its width */
-  width: 50%; /* Adjust the width as needed */
+/* #wallet-image {
+  z-index: 3;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(230deg);
+  width: 50%;
   background-color: transparent;
-  display: block; /* Ensure it behaves like a block element */
-  animation: EuroAnimation 2.5s linear forwards; /* Animation for 3 seconds */
-}
+  display: block;
+  animation: moveFromTop 5s linear forwards;
+} */
 
-#wallet-image {
-  position: absolute; /* Use absolute positioning */
-  left: 30%; /* Horizontally center by setting left to 50% */
-  transform: translateX(-10%) rotate(230deg); /* Move the element left by 50% of its width */
-  width: 50%; /* Adjust the width as needed */
+/* #euro-image {
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translateX(-50%);
+  width: 60%;
   background-color: transparent;
-  display: block; /* Ensure it behaves like a block element */
-  animation: moveFromTop 5s linear forwards; /* Animation for 3 seconds */
-}
+  display: block;
+  opacity: 0;
+  animation: EuroAnimation 1.5s linear forwards;
+  animation-delay: 2.5s;
+  animation-fill-mode: forwards;
+} */
 
 /* Keyframes for the animation */
-@keyframes moveFromTop {
+/* @keyframes moveFromTop {
   0% {
-    transform: translateY(-100%) translateX(-10%) rotate(230deg);
+    transform: translateY(-100%) translateX(-50%) rotate(230deg);
   }
   25% {
-    transform: translateY(-70%) translateX(-10%) rotate(230deg);
+    transform: translateY(-70%) translateX(-50%) rotate(230deg);
   }
   50% {
-    transform: translateY(-30%) translateX(-10%) rotate(230deg);
+    transform: translateY(-30%) translateX(-50%) rotate(230deg);
   }
   75% {
-    transform: translateY(-70%) translateX(-10%) rotate(230deg);
+    transform: translateY(-70%) translateX(-50%) rotate(230deg);
   }
   100% {
-    transform: translateY(-100%) translateX(-10%) rotate(230deg);
+    transform: translateY(-100%) translateX(-50%) rotate(230deg);
   }
-}
+} */
 
 /* Keyframes for the animation */
-@keyframes EuroAnimation {
+/* @keyframes EuroAnimation {
   0% {
-    transform: translateY(-80%) translateX(-10%);
-  }
-  25% {
-    transform: translateY(-70%) translateX(-10%);
+    top: 10%;
+    opacity: 100;
+    transform: translateX(-50%) translateY(-10%);
   }
   50% {
-    transform: translateY(-30%) translateX(-10%);
+    top: 15%;
+    opacity: 100;
+    transform: translateX(-50%) translateY(-15%);
   }
-}
+  100% {
+    top: 20%;
+    opacity: 100;
+    transform: translateX(-50%) translateY(-20%);
+  }
+} */
+
+/* Medium devices (tablets and small laptops, 600px to 1199px) */
+/* @media (min-width: 600px) and (max-width: 1199px) {
+  #euro-image {
+    width: 40%;
+  }
+} */
+
+/* Large devices (desktops and larger screens, 1200px and above) */
+/* @media (min-width: 1200px) {
+
+  #euro-image {
+    width: 30%;
+  }
+} */

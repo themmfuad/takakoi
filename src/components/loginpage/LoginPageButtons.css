@@ -1,0 +1,23 @@
+.login-page-button-container {
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  button{
+    border-radius: .5rem;
+    padding: .8rem;
+    border-width: .2rem;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 750;
+  }
+
+  button:hover, active{
+    background-color: var(--primary-color);
+    color: #fff;
+  }
