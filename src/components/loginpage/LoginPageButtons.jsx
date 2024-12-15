@@ -1,12 +1,17 @@
 import './LoginPageButtons.css';
 
-export default function LoginPageButtons(csb){
+export default function LoginPageButtons({buttonState, setButtonState}){
     return(
         <>
         <div className="login-page-button-container">
-        <button className='{csb.buttonState && "active"}'>Login</button>
+        <button className={buttonState == 'login' ? 'active' : ''} onClick={()=>{
+            setButtonState('login');
+        }}>Login</button>
+        {console.log(buttonState)}
         <button>Demo</button>
-        <button>Sign Up</button>
+        <button className={buttonState == 'signup' ? 'active' : ''} onClick={()=>{
+            setButtonState('signup');
+        }}>Signup</button>
         </div>
         </>
     );
