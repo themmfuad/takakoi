@@ -28,6 +28,7 @@ export default [
       quotes: ['error', 'single', { allowTemplateLiterals: true }],
       // Enforce double quotes for JSX attributes
       'jsx-quotes': ['error', 'prefer-double'],
+      'comma-dangle': ['error', 'always-multiline'],
 
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
