@@ -29,7 +29,7 @@ form#login-form-container input:focus {
   border: 0.15rem solid var(--secondary-color);
 }
 
-#username-input-rules {
+#input-rules {
   padding-left: 2rem;
   padding-top: 0.5rem;
   width: 15rem;

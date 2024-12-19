@@ -1,81 +1,62 @@
 import { useState } from 'react';
 import './LoginPageForm.css';
+import InputField from './InputField';
 
 export default function LoginPageForm({ buttonState }) {
-  const correctColor = '#0096ff',
-    errorColor = '#e30b5c';
-
-  const [usernameInputValue, setUsernameInputValue] = useState('');
-
-  const [usernameInputState, setUsernameInputState] = useState({
-    isFocused: false,
-    isStarted: false,
-    inputStates: {
-      breakMin: false,
-      breakMax: false,
-      hasSign: false,
+  // common states that all input field has
+  const commonInputFieldStates = {
+    focused: false,
+    started: false,
+    broken: {
+      min: false,
+      max: false,
+      pattern: false,
     },
-  });
+  };
 
-  function changeUsernameInputState(value) {
-    // is started
-    value.length >= 1
-      ? setUsernameInputState({
-          ...usernameInputState,
-          isStarted: true,
-        })
-      : setUsernameInputState({
-          ...usernameInputState,
-          isStarted: false,
-        });
+  //username input value and states
+  const [usernameInputValue, setUsernameInputValue] = useState('');
+  const [usernameInputStates, setUsernameInputStates] = useState(
+    commonInputFieldStates
+  );
 
-    // break min
-    value.length < 3
-      ? setUsernameInputState((usernameInputState) => ({
-          ...usernameInputState,
-          inputStates: { ...usernameInputState.inputStates, breakMin: true },
-        }))
-      : setUsernameInputState((usernameInputState) => ({
-          ...usernameInputState,
-          inputStates: { ...usernameInputState.inputStates, breakMin: false },
-        }));
+  //nickname input value and states
+  const [nickNameInputValue, setNickNameInputValue] = useState('');
+  const [nickNameInputStates, setNickNameInputStates] = useState(
+    commonInputFieldStates
+  );
 
-    // break max
-    value.length > 21
-      ? setUsernameInputState((usernameInputState) => ({
-          ...usernameInputState,
-          inputStates: { ...usernameInputState.inputStates, breakMax: true },
-        }))
-      : setUsernameInputState((usernameInputState) => ({
-          ...usernameInputState,
-          inputStates: { ...usernameInputState.inputStates, breakMax: false },
-        }));
-
-    // no sign
-    /^[a-zA-Z0-9]+$/.test(value)
-      ? setUsernameInputState((usernameInputState) => ({
-          ...usernameInputState,
-          inputStates: { ...usernameInputState.inputStates, hasSign: false },
-        }))
-      : setUsernameInputState((usernameInputState) => ({
-          ...usernameInputState,
-          inputStates: { ...usernameInputState.inputStates, hasSign: true },
-        }));
-  }
+  //password input value and states
+  const [passwordInputValue, setPasswordInputValue] = useState('');
+  const [passwordInputStates, setPasswordInputStates] = useState(
+    commonInputFieldStates
+  );
 
   return (
     <form id="login-form-container" onSubmit={(event) => {}}>
       {(() => {
         if (buttonState == 'signup') {
           return (
-            <>
-              <label htmlFor="nickname-input">Nickname:</label>
-              <input type="text" name="nickname" id="nickname-input" />
-            </>
+            <InputField
+              inputName={'nickname'}
+              inputTitle={'Nickname'}
+              inputRules={{
+                minLength: 3,
+                maxLength: 21,
+                pattern: {
+                  value: /^[a-zA-Z0-9]*$/,
+                  warning: 'No sign or symbols only alpha-numeric characters',
+                },
+              }}
+              inputValue={nickNameInputValue}
+              setInputValue={setNickNameInputValue}
+              inputStates={nickNameInputStates}
+              setInputStates={setNickNameInputStates}
+            />
           );
         }
       })()}
-      <label htmlFor="username-input">Username:</label>
+      {/* <label htmlFor="username-input">Username:</label>
       <input
         maxLength={21}
         type="text"
@@ -83,48 +64,48 @@ export default function LoginPageForm({ buttonState }) {
         id="username-input"
         value={usernameInputValue}
         onFocus={() =>
-          setUsernameInputState({ ...usernameInputState, isFocused: true })
+          setUsernameInputStates({ ...usernameInputStates, focused: true })
         }
         onBlur={() =>
-          setUsernameInputState({ ...usernameInputState, isFocused: false })
+          setUsernameInputStates({ ...usernameInputStates, focused: false })
         }
         onChange={(event) => {
           setUsernameInputValue(event.target.value);
-          changeUsernameInputState(event.target.value);
+          changeUsernameInputStates(event.target.value);
         }}
       />
       <ul
         style={{
-          display: `${usernameInputState.isFocused && usernameInputState.isStarted ? 'block' : 'none'}`,
+          display: `${usernameInputStates.focused ? 'block' : 'none'}`,
         }}
         id="username-input-rules"
       >
         <li
           style={{
-            color: `${usernameInputState.inputStates.breakMin ? errorColor : correctColor}`,
+            color: `${usernameInputStates.broken.min ? errorColor : correctColor}`,
           }}
         >
           minimum 3 alpha-numeric character
         </li>
         <li
           style={{
-            color: `${usernameInputState.inputStates.hasSign ? errorColor : correctColor}`,
+            color: `${usernameInputStates.broken.pattern ? errorColor : correctColor}`,
           }}
         >
           no sign or symbols
         </li>
         <li
           style={{
-            color: `${usernameInputState.inputStates.breakMax ? errorColor : correctColor}`,
+            color: `${usernameInputStates.broken.max ? errorColor : correctColor}`,
           }}
         >
           not more than 21 character
         </li>
-      </ul>
+      </ul> */}
 
       <label htmlFor="password-input">Password:</label>
       <input
-        disabled="disabled"
+        // disabled="disabled"
         type="text"
         name="password"
         id="password-input"
