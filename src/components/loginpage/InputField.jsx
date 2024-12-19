@@ -10,6 +10,7 @@
 // }
 
 export default function InputField({
+  buttonState,
   inputName,
   inputTitle,
   inputRules,
@@ -35,9 +36,11 @@ export default function InputField({
   //       });
   // }
 
-  function hasBrokenMin() {
+  console.log(inputValue);
+
+  function hasBrokenMin(inputValue) {
     console.log(inputValue.length);
-    inputValue.length < 3
+    inputValue.length < inputRules.minLength
       ? setInputStates((prevInputStates) => ({
           ...prevInputStates,
           broken: { ...prevInputStates.broken, min: true },
@@ -48,7 +51,7 @@ export default function InputField({
         }));
   }
 
-  function hasBrokenMax() {
+  function hasBrokenMax(inputValue) {
     inputValue.length > 21
       ? setInputStates((prevInputStates) => ({
           ...prevInputStates,
@@ -60,7 +63,9 @@ export default function InputField({
         }));
   }
 
-  function hasBrokenPattern() {
+  function hasBrokenPattern(inputValue) {
+    // console.log(inputValue);
+
     inputRules.pattern.value.test(inputValue)
       ? setInputStates((prevInputStates) => ({
           ...prevInputStates,
@@ -72,11 +77,11 @@ export default function InputField({
         }));
   }
 
-  function changeInputStates() {
+  function changeInputStates(inputValue) {
     // hasStarted(inputValue, usernameInputStates, setUsernameInputStates);
-    hasBrokenMin();
-    hasBrokenMax();
-    hasBrokenPattern();
+    hasBrokenMin(inputValue);
+    hasBrokenMax(inputValue);
+    hasBrokenPattern(inputValue);
   }
 
   return (
@@ -86,10 +91,20 @@ export default function InputField({
         type="text"
         name={inputName}
         id={inputName + ':'}
-        maxLength={inputRules.maxLength.value}
+        maxLength={inputRules.maxLength}
         value={inputValue}
-        onFocus={() => setInputStates({ ...inputStates, focused: true })}
-        onBlur={() => setInputStates({ ...inputStates, focused: false })}
+        onFocus={() =>
+          setInputStates((prevInputStates) => ({
+            ...prevInputStates,
+            focused: true,
+          }))
+        }
+        onBlur={() =>
+          setInputStates((prevInputStates) => ({
+            ...prevInputStates,
+            focused: false,
+          }))
+        }
         onChange={(event) => {
           setInputValue(event.target.value);
           changeInputStates(event.target.value);
@@ -97,31 +112,40 @@ export default function InputField({
       />
       <ul
         style={{
-          display: `${inputStates.focused ? 'block' : 'none'}`,
+          display: `${inputStates.focused && buttonState == 'signup' ? 'block' : 'none'}`,
         }}
         id="input-rules"
       >
+        {/* minimum warning */}
         <li
           style={{
             color: `${inputStates.broken.min ? errorColor : correctColor}`,
           }}
         >
-          minimum {inputRules.minLength.value} character
+          minimum {inputRules.minLength} character
         </li>
-        <li
-          style={{
-            color: `${inputStates.broken.pattern ? errorColor : correctColor}`,
-          }}
-        >
-          {inputRules.pattern.warning}
-        </li>
+
+        {/* maximum warning */}
         <li
           style={{
             color: `${inputStates.broken.max ? errorColor : correctColor}`,
           }}
         >
-          not more than {inputRules.maxLength.value} character
+          not more than {inputRules.maxLength} character
         </li>
+
+        {/* pattern warning */}
+        {inputName != 'password' ? (
+          <li
+            style={{
+              color: `${inputStates.broken.pattern ? errorColor : correctColor}`,
+            }}
+          >
+            {inputRules.pattern.warning}
+          </li>
+        ) : (
+          ''
+        )}
       </ul>
     </>
   );

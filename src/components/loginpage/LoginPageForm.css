@@ -21,7 +21,7 @@ form#login-form-container input {
   border: 0.15rem solid var(--primary-color);
   border-radius: 0.5rem;
   font-size: 1rem;
-  padding-left: 0.5rem;
+  padding: 0 0.5rem;
   outline: none;
 }
 
