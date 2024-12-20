@@ -6,6 +6,7 @@ import LoginPageForm from './LoginPageForm';
 import { useState } from 'react';
 
 export default function LoginPage() {
+  // login page button state
   const [buttonState, setButtonState] = useState('login');
   return (
     <>

@@ -9,6 +9,8 @@
 //     }
 // }
 
+import { startTransition } from "react";
+
 export default function InputField({
   buttonState,
   inputName,
@@ -36,10 +38,7 @@ export default function InputField({
   //       });
   // }
 
-  console.log(inputValue);
-
   function hasBrokenMin(inputValue) {
-    console.log(inputValue.length);
     inputValue.length < inputRules.minLength
       ? setInputStates((prevInputStates) => ({
           ...prevInputStates,
@@ -47,7 +46,7 @@ export default function InputField({
         }))
       : setInputStates((prevInputStates) => ({
           ...prevInputStates,
-          broken: { ...prevInputStates.inputStates, min: false },
+          broken: { ...prevInputStates.broken, min: false },
         }));
   }
 
@@ -64,8 +63,6 @@ export default function InputField({
   }
 
   function hasBrokenPattern(inputValue) {
-    // console.log(inputValue);
-
     inputRules.pattern.value.test(inputValue)
       ? setInputStates((prevInputStates) => ({
           ...prevInputStates,
@@ -84,6 +81,11 @@ export default function InputField({
     hasBrokenPattern(inputValue);
   }
 
+  function test(){
+    
+  }
+
+
   return (
     <>
       <label htmlFor={inputName + '-input'}>{inputTitle + ':'}</label>
@@ -96,20 +98,26 @@ export default function InputField({
         onFocus={() =>
           setInputStates((prevInputStates) => ({
             ...prevInputStates,
+            broken: { ...prevInputStates.broken,},
             focused: true,
           }))
         }
-        onBlur={() =>
-          setInputStates((prevInputStates) => ({
-            ...prevInputStates,
-            focused: false,
-          }))
+        onBlur={(event) => {
+          event.relatedTarget?.click(); // when losing focus simulate click on the outside click event first 
+          setInputStates((prevInputStates) => ({ // after the new click event update the state
+              ...prevInputStates,
+              broken: { ...prevInputStates.broken,},
+              focused: false,
+            }));
+          }
         }
         onChange={(event) => {
           setInputValue(event.target.value);
           changeInputStates(event.target.value);
         }}
       />
+
+      {/*  Non blocking UI as onBlur doesn't block other changes in the UI*/}
       <ul
         style={{
           display: `${inputStates.focused && buttonState == 'signup' ? 'block' : 'none'}`,
@@ -147,6 +155,7 @@ export default function InputField({
           ''
         )}
       </ul>
+
     </>
   );
 }

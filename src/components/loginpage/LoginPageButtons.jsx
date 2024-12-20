@@ -7,21 +7,18 @@ export default function LoginPageButtons({ buttonState, setButtonState }) {
         <button
           className={buttonState == 'login' ? 'active' : ''}
           onClick={() => {
-            buttonState == 'login'
-              ? console.log('submit')
-              : setButtonState('login');
+            console.log('clicked on login');  
+            setButtonState((prevButtonState)=>prevButtonState == 'login' ? console.log('submit') : 'login');
           }}
         >
           Login
         </button>
-        {console.log(buttonState)}
         <button>Demo</button>
         <button
           className={buttonState == 'signup' ? 'active' : ''}
           onClick={() => {
-            buttonState == 'signup'
-              ? console.log('submit signup')
-              : setButtonState('signup');
+            console.log('clicked on signup');
+            setButtonState((prevButtonState)=>prevButtonState == 'signup' ? console.log('submit') : 'signup');
           }}
         >
           Signup

@@ -52,7 +52,7 @@ export default function LoginPageForm({ buttonState }) {
                 maxLength: 21,
                 pattern: {
                   value: /^[a-zA-Z0-9]*$/,
-                  warning: 'No sign or symbols only alpha-numeric characters',
+                  warning: 'only alpha-numeric characters',
                 },
               }}
               inputValue={nickNameInputValue}
