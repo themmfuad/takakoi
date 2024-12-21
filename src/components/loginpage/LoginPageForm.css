@@ -11,7 +11,7 @@
   color: var(--text-color);
 }
 
-form#login-form-container label:nth-of-type(2) {
+form#login-form-container label {
   margin-top: 0.5rem;
 }
 

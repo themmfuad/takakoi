@@ -6,11 +6,11 @@ export default function LoginPageForm({ buttonState }) {
   // common states that all input field has
   const commonInputFieldStates = {
     focused: false,
-    started: false,
+    // started: false,
     broken: {
       min: true,
       max: false,
-      pattern: false,
+      pattern: true,
     },
   };
 
@@ -29,12 +29,18 @@ export default function LoginPageForm({ buttonState }) {
   //password input value and states
   const [passwordInputValue, setPasswordInputValue] = useState('');
   const [passwordInputStates, setPasswordInputStates] = useState({
+    // copying focused and started
     ...commonInputFieldStates,
-    pattern: {
-      hasUpper: false,
-      hasLower: false,
-      hasDigit: false,
-      hasSymbol: false,
+    broken: {
+      // copying min and max
+      ...commonInputFieldStates.broken,
+      // new value for pattern object
+      pattern: {
+        upper: true,
+        lower: true,
+        digit: true,
+        symbol: true,
+      },
     },
   });
 
@@ -87,10 +93,6 @@ export default function LoginPageForm({ buttonState }) {
         inputRules={{
           minLength: 8,
           maxLength: 21,
-          pattern: {
-            value: /^[a-zA-Z0-9]*$/,
-            warning: 'only alpha-numeric characters',
-          },
         }}
         inputValue={passwordInputValue}
         setInputValue={setPasswordInputValue}
