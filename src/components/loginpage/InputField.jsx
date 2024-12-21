@@ -9,8 +9,6 @@
 //     }
 // }
 
-import { startTransition } from 'react';
-
 export default function InputField({
   buttonState,
   inputName,
@@ -20,23 +18,12 @@ export default function InputField({
   setInputValue,
   inputStates,
   setInputStates,
+  invalidFields,
+  setInvalidFields,
 }) {
   // feedback color for input feild rules
-  const correctColor = '#0096ff',
+  const correctColor = '#00ab66',
     errorColor = '#e30b5c';
-
-  // user started to typing
-  // function hasStarted(inputValue, inputStates, setInputStates) {
-  //   inputValue.length >= 1
-  //     ? setInputStates({
-  //         ...inputStates,
-  //         started: true,
-  //       })
-  //     : setInputStates({
-  //         ...inputStates,
-  //         started: false,
-  //       });
-  // }
 
   function updateInputState(stateName, stateValue) {
     setInputStates((prevInputStates) => ({
@@ -46,6 +33,18 @@ export default function InputField({
         [stateName]: stateValue,
       },
     }));
+
+    setInvalidFields((prevSet) => {
+      const newMap = new Map(prevSet);
+
+      newMap.has(inputName)
+        ? newMap.get(inputName) == stateValue
+          ? ''
+          : newMap.set(inputName, stateValue)
+        : newMap.set(inputName, stateValue);
+
+      return newMap; // Return the updated Map
+    });
   }
 
   function hasBrokenMin(inputValue) {
@@ -77,6 +76,18 @@ export default function InputField({
         },
       },
     }));
+
+    setInvalidFields((prevSet) => {
+      const newMap = new Map(prevSet);
+
+      newMap.has(inputName)
+        ? newMap.get(inputName) == stateValue
+          ? ''
+          : newMap.set(inputName, stateValue)
+        : newMap.set(inputName, stateValue);
+
+      return newMap; // Return the updated Map
+    });
   }
 
   function updatePasswordStateAccordingToPattern(
@@ -123,6 +134,27 @@ export default function InputField({
     <>
       <label htmlFor={inputName + '-input'}>{inputTitle + ':'}</label>
       <input
+        // className={inputValue.length > 0 ? isValid() : ''}
+        className={
+          buttonState == 'signup'
+            ? inputStates.started == true
+              ? inputName != 'password'
+                ? Object.values(inputStates.broken).some(
+                    (value) => value === true
+                  )
+                  ? 'invalid-input'
+                  : 'valid-input'
+                : Object.values(inputStates.broken).some(
+                      (value) => value === true
+                    ) ||
+                    Object.values(inputStates.broken.pattern).some(
+                      (value) => value === true
+                    )
+                  ? 'invalid-input'
+                  : 'valid-input'
+              : ''
+            : ''
+        }
         type="text"
         name={inputName}
         id={inputName + ':'}
@@ -133,6 +165,7 @@ export default function InputField({
             ...prevInputStates,
             broken: { ...prevInputStates.broken },
             focused: true,
+            started: buttonState == 'signup' ? true : false,
           }))
         }
         onBlur={(event) => {

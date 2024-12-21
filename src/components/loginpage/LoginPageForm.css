@@ -26,7 +26,23 @@ form#login-form-container input {
 }
 
 form#login-form-container input:focus {
-  border: 0.15rem solid var(--secondary-color);
+  border: 0.15rem solid var(--error-color);
+}
+
+form#login-form-container .invalid-input {
+  border: 0.15rem solid var(--error-color);
+}
+
+form#login-form-container .invalid-input:focus {
+  border: 0.15rem solid var(--error-color);
+}
+
+form#login-form-container .valid-input {
+  border: 0.15rem solid var(--valid-color);
+}
+
+form#login-form-container .valid-input:focus {
+  border: 0.15rem solid var(--valid-color);
 }
 
 #input-rules {

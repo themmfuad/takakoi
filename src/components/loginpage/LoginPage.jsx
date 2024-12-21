@@ -7,7 +7,8 @@ import { useState } from 'react';
 
 export default function LoginPage() {
   // login page button state
-  const [buttonState, setButtonState] = useState('login');
+  const [buttonState, setButtonState] = useState({ now: 'login', after: '' });
+  const [invalidFields, setInvalidFields] = useState(new Map());
   return (
     <>
       {/* <img src={wallet} alt="wallet image" id="wallet-image" />
@@ -15,8 +16,16 @@ export default function LoginPage() {
       <div className="login-page-container">
         <h1 id="title">Takakoi???</h1>
         <h3 id="subtitle">Open source | Anonymous | Quick - Expense Tracker</h3>
-        <LoginPageButtons buttonState={buttonState} setButtonState={setButtonState}/>
-        <LoginPageForm buttonState={buttonState} />
+        <LoginPageButtons
+          buttonState={buttonState}
+          setButtonState={setButtonState}
+          invalidFields={invalidFields}
+        />
+        <LoginPageForm
+          buttonState={buttonState}
+          invalidFields={invalidFields}
+          setInvalidFields={setInvalidFields}
+        />
       </div>
     </>
   );

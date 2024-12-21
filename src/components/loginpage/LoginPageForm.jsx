@@ -2,11 +2,15 @@ import { useState } from 'react';
 import './LoginPageForm.css';
 import InputField from './InputField';
 
-export default function LoginPageForm({ buttonState }) {
+export default function LoginPageForm({
+  buttonState,
+  invalidFields,
+  setInvalidFields,
+}) {
   // common states that all input field has
   const commonInputFieldStates = {
     focused: false,
-    // started: false,
+    started: false,
     broken: {
       min: true,
       max: false,
@@ -65,6 +69,8 @@ export default function LoginPageForm({ buttonState }) {
               setInputValue={setNickNameInputValue}
               inputStates={nickNameInputStates}
               setInputStates={setNickNameInputStates}
+              invalidFields={invalidFields}
+              setInvalidFields={setInvalidFields}
             />
           );
         }
@@ -85,6 +91,8 @@ export default function LoginPageForm({ buttonState }) {
         setInputValue={setUsernameInputValue}
         inputStates={usernameInputStates}
         setInputStates={setUsernameInputStates}
+        invalidFields={invalidFields}
+        setInvalidFields={setInvalidFields}
       />
       <InputField
         buttonState={buttonState}
@@ -98,6 +106,8 @@ export default function LoginPageForm({ buttonState }) {
         setInputValue={setPasswordInputValue}
         inputStates={passwordInputStates}
         setInputStates={setPasswordInputStates}
+        invalidFields={invalidFields}
+        setInvalidFields={setInvalidFields}
       />
     </form>
   );

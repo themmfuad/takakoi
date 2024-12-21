@@ -1,24 +1,57 @@
 import './LoginPageButtons.css';
 
-export default function LoginPageButtons({ buttonState, setButtonState }) {
+export default function LoginPageButtons({
+  buttonState,
+  setButtonState,
+  invalidFields,
+}) {
+  function handleSubmit(action) {
+    invalidFields.forEach((value, key) => {
+      if (value == true) {
+        setButtonState((prevButtonState) => ({
+          ...prevButtonState,
+          after: 'invalid',
+        }));
+      } else
+        setButtonState((prevButtonState) => ({
+          ...prevButtonState,
+          after: 'valid',
+        }));
+    });
+  }
+
   return (
     <>
       <div className="login-page-button-container">
         <button
-          className={buttonState == 'login' ? 'active' : ''}
+          className={buttonState.now == 'login' ? 'active' : ''}
           onClick={() => {
-            console.log('clicked on login');  
-            setButtonState((prevButtonState)=>prevButtonState == 'login' ? console.log('submit') : 'login');
+            console.log('clicked on login');
+            setButtonState((prevButtonState) =>
+              prevButtonState.now == 'login'
+                ? handleSubmit('login')
+                : {
+                    ...prevButtonState,
+                    now: 'signup',
+                  }
+            );
           }}
         >
           Login
         </button>
         <button>Demo</button>
         <button
-          className={buttonState == 'signup' ? 'active' : ''}
+          className={buttonState.now == 'signup' ? 'active' : ''}
           onClick={() => {
             console.log('clicked on signup');
-            setButtonState((prevButtonState)=>prevButtonState == 'signup' ? console.log('submit') : 'signup');
+            setButtonState((prevButtonState) =>
+              prevButtonState.now == 'signup'
+                ? handleSubmit('signup')
+                : {
+                    ...prevButtonState,
+                    now: 'login',
+                  }
+            );
           }}
         >
           Signup

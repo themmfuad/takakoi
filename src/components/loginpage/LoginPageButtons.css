@@ -1,34 +1,72 @@
 .login-page-button-container {
-    height: 8vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-  
-  button{
-    border-radius: .5rem;
-    padding: .8rem;
-    border-width: .2rem;
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 750;
-  }
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
 
-  button:hover{
-    background-color: var(--primary-color);
-    color: #fff;
-  }
+button {
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  border-width: 0.2rem;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 750;
+  font-size: 1rem;
+}
 
-  .active{
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    color: #fff;
-  }
+button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
 
-  .active:hover{
-    background-color: var(--background-color);
-    color: var(--secondary-color);
-  }
+.active {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: #fff;
+}
+
+.active:hover {
+  background-color: var(--background-color);
+  color: var(--secondary-color);
+}
+
+/* tooltip for warning */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
