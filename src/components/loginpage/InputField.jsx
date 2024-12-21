@@ -100,7 +100,11 @@ export default function InputField({
     updatePasswordStateAccordingToPattern(/\d/, 'digit', inputValue);
 
     // symbol
-    updatePasswordStateAccordingToPattern(/[\W_]/, 'symbol', inputValue);
+    updatePasswordStateAccordingToPattern(
+      /[\!\\"#\$%\&'\(\)\*\+,\-\.\/:;<=>\?@\[\]\\\^\_\`\{\|\}~]/,
+      'symbol',
+      inputValue
+    );
   }
 
   function generateRulesListItem(condition, content) {

@@ -57,7 +57,7 @@ export default function LoginPageForm({ buttonState }) {
                 minLength: 3,
                 maxLength: 21,
                 pattern: {
-                  value: /^[a-zA-Z0-9]*$/,
+                  value: /^[a-zA-Z0-9]+$/,
                   warning: 'only alpha-numeric characters',
                 },
               }}
@@ -77,7 +77,7 @@ export default function LoginPageForm({ buttonState }) {
           minLength: 3,
           maxLength: 21,
           pattern: {
-            value: /^[a-zA-Z0-9]*$/,
+            value: /^[a-zA-Z0-9]+$/,
             warning: 'only alpha-numeric characters',
           },
         }}
